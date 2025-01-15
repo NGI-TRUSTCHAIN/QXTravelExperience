@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm Email Change</title>
+</head>
+<body>
+    <br />
+    <p>A request has been made to change your email address from {{ old_email }} to {{ new_email }}.</p>
+    <p>Please confirm by clicking the button below:</p>
+    
+    <!-- Confirmation Button -->
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+            <td align="center" style="border-radius: 5px;" bgcolor="#1a82e2">
+                <a href="{{ verification_link }}" target="_blank" 
+                   style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; 
+                          padding: 12px 24px; display: inline-block;">
+                    Confirm Email Change
+                </a>
+            </td>
+        </tr>
+    </table>
+    
+    <!-- Fallback Link -->
+    <p>If the button above doesn't work, please click the link below:</p>
+    <p><a href="{{ verification_link }}">{{ verification_link }}</a></p>
+</body>
+</html>

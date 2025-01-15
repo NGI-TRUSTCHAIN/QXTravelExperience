@@ -1,0 +1,12 @@
+{
+    "name": "api-server-django",
+    "version": "1.0.0",
+    "description": "API Server",
+    "scripts": {},
+    "author": "QX",
+    "engines": {
+        "node": ">=10.0.0"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}

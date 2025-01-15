@@ -1,0 +1,196 @@
+{
+  "CreateIdLabels": {
+    "title": {
+      "start": "",
+      "information": "Your Rewards Wallet",
+      "form": "Your Rewards Wallet",
+      "success": "Check your email"
+    },
+    "description": {
+      "start": "",
+      "information": "We only require emails for issuing rewards and secure wallet recovery. Your transactions are safeguarded on the Polygon blockchain network, ensuring data integrity. We have no access to or control over your tokens or personal information.",
+      "form": "We only require emails for issuing rewards and secure wallet recovery. Your transactions are safeguarded on the Polygon blockchain network, ensuring data integrity. We have no access to or control over your tokens or personal information.",
+      "success": {
+        "email": "Check your email",
+        "verification": "A verification email has been sent to example@email.com. Please check your mailbox to verify the account before you claim your reward."
+      }
+    },
+    "label": {
+      "form": "Reconnect or create a wallet",
+      "placeholder": "example@email.com"
+    },
+    "button": {
+      "start": "Create",
+      "information": "Create",
+      "form": "Continue",
+      "success": "Open Email"
+    },
+    "error": {
+      "form": "Invalid email format. Email must contain @"
+    },
+    "helper": "or resend email",
+    "resetEmail": {
+      "title": "Check your email",
+      "description": "After you submit a new email address, we will send you a confirmation email."
+    }
+  },
+  "CreateIdMediolanumLabels": {
+    "title": {
+      "id": "Self-Sovereign ID",
+      "email": "Check your email"
+    },
+    "description": {
+      "id": "We only require emails for issuing secure wallet recovery. Your transactions are safeguarded on the blockchain network, ensuring data integrity. We have no access to or control over your personal information.",
+      "email": "A verification email has been sent to example@email.com. Please check your mailbox to verify the account before you claim your reward."
+    },
+    "label": {
+      "id": "Reconnect or create a wallet",
+      "input": "example@email.com"
+    },
+    "button": {
+      "id": "Continue",
+      "email": "Open Email"
+    },
+    "error": {
+      "email": "Invalid email format. Email must contain @"
+    },
+    "helper": "or resend email",
+    "resetEmail": {
+      "title": "Check your email",
+      "description": "After you submit a new email address, we will send you a confirmation email.",
+      "label": "Enter your new email address",
+      "action": "Confirm"
+    }
+  },
+  "AccountsLabels": {
+    "active": {
+      "title": "Home",
+      "action": "Active",
+      "tokenDescription": "Your full amount of QX Tokens"
+    }
+  },
+  "ProfileLabels": {
+    "details": {
+      "title": "Profile Details",
+      "firstName": "John",
+      "lastName": "Doe",
+      "profilePicture": "https://randomuser.me",
+      "phoneNumber": "+1 123 456 7890",
+      "birthday": "10/10/1993",
+      "changeUserInfo": {
+        "title": "Profile Information",
+        "description": "Change your profile information",
+        "firstName": {
+          "label": "First Name",
+          "error": "Please enter a valid first name"
+        },
+        "lastName": {
+          "label": "Last Name",
+          "error": "Please enter a valid last name"
+        },
+        "profilePicture": {
+          "label": "Profile Picture"
+        },
+        "phoneNumber": {
+          "label": "Phone Number",
+          "error": "Please enter a valid phone number"
+        },
+        "birthday": {
+          "label": "Date of Birth",
+          "error": "Please enter a valid date of birth"
+        },
+        "action": "Submit"
+      }
+    },
+    "account": {
+      "title": "Account",
+      "email": "john.doe@example.email",
+      "walletKeys": "Your Wallet Keys",
+      "privacyPolicy": "Privacy Policy"
+    },
+    "history": {
+      "title": "History",
+      "transaction": "No registrations yet..",
+      "registered": "Registered with",
+      "deleted": "Deleted with"
+    }
+  },
+  "PreferencesLabels": {
+    "title": "Your Preferences",
+    "specialOffers": "Allow brands to send you special offers",
+    "shareData": "Share your usage data with brands",
+    "shareEmail": "Share your email with brands",
+    "shareRewards": "Share data only if rewards are included",
+    "shareName": "Never share your Name"
+  },
+  "WalletLabels": {
+    "title": "Your Wallet Keys",
+    "description": "The secret phrase is the key to your wallet. Never share your secret phrase with anyone, store it securely!",
+    "address": "Wallet Address",
+    "action": "Backup",
+    "modal": {
+      "title": "Backup Wallet",
+      "description": {
+        "download": "This will download a TXT file containing the wallet information onto your device encrypted with the password.",
+        "meta": "You can use this TXT file to import the account in MetaMask using the same password."
+      }
+    }
+  },
+  "PolicyLabels": {
+    "title": "Privacy Policy and Terms of Service",
+    "date": "Effective Date: 20.08.2023",
+    "introduction": {
+      "title": "1. Introduction",
+      "description": "Welcome to the Decentralised ID platform (&quot;Platform&quot;), provided by QX Ventures, Inc. (&quot;QX Ventures,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;). This document outlines our Privacy Policy and Terms of Service. By accessing and using the Platform, you agree to comply with these terms and policies. Please read them carefully."
+    },
+    "privacy": {
+      "title": "2. Privacy Policy",
+      "description": ""
+    },
+    "dataControl": {
+      "title": "3. Data Control",
+      "description": "Users have full control over their data on the Platform. We do not collect or store any personal data without your explicit consent."
+    },
+    "dataUsage": {
+      "title": "4. Data Usage",
+      "description": "While interacting with our products, users may leave traces of usability data."
+    },
+    "action": "Delete Id",
+    "modal": {
+      "delete": {
+        "title": "Woho, There!",
+        "description": "Once you delete your ID, there is no way of getting it back. Make sure you want to do this. You will permanently lose access to your purchase history, rewards and personal data.",
+        "label": "Enable this if you agree"
+      },
+      "funds": {
+        "title": "You Have Funds!",
+        "description": "Regrettably, accounts containing reward tokens cannot be deleted. You have the option to retain your account, contribute the funds to charity, or return them to the network. How would you like to proceed?",
+        "network": "Give funds to network",
+        "charity": "Donate funds to charity",
+        "action": "Confirm"
+      }
+    }
+  },
+  "ToastAlertLabels": {
+    "preferences": {
+      "title": "Your Preferences Have Been Updated",
+      "error": "An error occurred while updating your preferences"
+    },
+    "deleteId": {
+      "title": "Account ID Has Been Deleted",
+      "error": "An error occurred while deleting your account ID"
+    },
+    "changeEmail": {
+      "title": "Email has been changed",
+      "error": "An error occurred while changing your email"
+    },
+    "changeUserInfo": {
+      "title": "Profile Information has been updated",
+      "error": "An error occurred while updating your profile information"
+    },
+    "backupWallet": {
+      "title": "Wallet Backup has been downloaded",
+      "error": "An error occurred while downloading your wallet backup"
+    }
+  }
+}
