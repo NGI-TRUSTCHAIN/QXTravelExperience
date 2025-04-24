@@ -18,7 +18,7 @@ const ChangeEmailForm: React.FC<ChangeEmailFormProps> = ({
                     render={({ field }) => (
                         <FormItem className='relative'>
                             <FormLabel className='text-luckyBlue pl-2'>
-                                {languageData.CreateIdMediolanumLabels.resetEmail.label}
+                                {languageData.CreateIdQXLabels.resetEmail.label}
                             </FormLabel>
                             <FormControl>
                                 <Input
@@ -32,7 +32,7 @@ const ChangeEmailForm: React.FC<ChangeEmailFormProps> = ({
                 />
                 <DialogSubmit
                     variant="default"
-                    text={languageData.CreateIdMediolanumLabels.resetEmail.action.toLocaleUpperCase()}
+                    text={languageData.CreateIdQXLabels.resetEmail.action.toLocaleUpperCase()}
                 />
             </form>
         </Form>

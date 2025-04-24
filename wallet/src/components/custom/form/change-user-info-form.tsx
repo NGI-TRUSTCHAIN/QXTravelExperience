@@ -27,7 +27,8 @@ const ChangeUserInfoForm: React.FC<ChangeUserInfoProps> = ({
                 <FormField
                     control={changeUserInfoForm.control}
                     name='profile_picture'
-                    render={({ field: { onChange, ...fieldProps } }) => (
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                    render={({ field: { onChange, value, ...fieldProps } }) => (
                         <FormItem className='relative'>
                             <FormLabel className='text-luckyBlue pl-2'>
                                 {languageData.ProfileLabels.details.changeUserInfo.profilePicture.label}
@@ -39,7 +40,8 @@ const ChangeUserInfoForm: React.FC<ChangeUserInfoProps> = ({
                                     onChange={(e) => onChange(e.target.files && e.target.files[0])}
                                     placeholder={languageData.ProfileLabels.details.profilePicture}
                                     multiple={false}
-                                    {...fieldProps} />
+                                    {...fieldProps} // "value" omitted to keep the input uncontrolled
+                                />
                             </FormControl>
                             <FormMessage className='absolute text-maroonPink pl-2' />
                         </FormItem>

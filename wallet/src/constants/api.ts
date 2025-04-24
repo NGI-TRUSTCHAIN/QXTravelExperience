@@ -12,6 +12,10 @@ export const apiEndpoints: ApiEndpoints = {
     userLogs: `${BASE_API_URL}/api/user/logs`,
     userDeleteAccount: `${BASE_API_URL}/api/user/delete-account`,
     userChangeEmail: `${BASE_API_URL}/api/user/change-email`,
+    did: {
+      create: `${BASE_API_URL}/api/blockchain/add_did`,
+      get: `${BASE_API_URL}/api/blockchain/dids`,
+    }
   },
   public: {
     sendOtp: `${BASE_API_URL}/api/customer/auth/email/`,

@@ -9,6 +9,7 @@ export interface ModalMap {
     deleteId: ModalProps;
     changeEmail: ModalProps;
     changeUserInfo: ModalProps;
+    createDID: ModalProps;
 }
 
 export enum CreateIdSteps {

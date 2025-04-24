@@ -7,6 +7,7 @@ import PreferencesPage from './pages/preferences'
 import ProfilePage from './pages/profile'
 import VerifyAuth from './pages/verify-auth'
 import WalletPage from './pages/wallet'
+import DIDPage from './pages/did'
 
 function App() {
   return (
@@ -32,6 +33,10 @@ function App() {
         <Route
           path={routes.wallet}
           element={<ProtectedRoute element={<WalletPage />} />}
+        />
+        <Route
+          path={routes.did}
+          element={<ProtectedRoute element={<DIDPage />} />}
         />
       </Routes>
     </BrowserRouter>

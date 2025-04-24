@@ -10,7 +10,7 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [isLoading, setIsLoading] = useState(true)
   const { isAuthenticated, authToken, } = useAuthStore()
-  
+
   useEffect(() => {
     const checkAuth = async () => {
       setIsLoading(false)

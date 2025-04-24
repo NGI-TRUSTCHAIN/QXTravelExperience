@@ -17,7 +17,8 @@ const ProfileLayout: React.FC = () => {
   const {
     profileDetailsItems,
     profileAccountItems,
-    profileHistoryItems
+    profileHistoryItems,
+    // DIDItems,
   } = ProfileSectionItems();
 
   React.useEffect(() => {
@@ -52,6 +53,12 @@ const ProfileLayout: React.FC = () => {
         sectionItems={profileAccountItems}
         loading={userInfoLoading}
       />
+      {/* <ProfileInfoSection
+        icon={<UserIcon size={26} className='bg-black text-white  rounded-full' />}
+        title={"DID"}
+        sectionItems={DIDItems}
+        loading={DIDloading}
+      /> */}
       <ProfileInfoSection
         icon={<HistoryIcon size={26} className='bg-black text-white  rounded-full' />}
         title={languageData.ProfileLabels.history.title}
@@ -60,7 +67,6 @@ const ProfileLayout: React.FC = () => {
       />
 
       <ChangeEmailModal />
-
       <ChangeUserInfoModal />
     </div>
   )

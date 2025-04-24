@@ -1,4 +1,3 @@
-
 import { IconButtonProps, NavbarProps } from '@/interface/navbar'
 import { cn } from '@/lib/utils'
 import { ChevronLeftIcon } from 'lucide-react'
@@ -51,6 +50,7 @@ const NavbarLayout: React.FC<NavbarProps> = ({
                             onClick={() => navigate(item.route)}
                             active={pathname === item.route}
                             icon={item.icon}
+                            notificationValue={undefined}
                         />
                     ))}
                 </div>

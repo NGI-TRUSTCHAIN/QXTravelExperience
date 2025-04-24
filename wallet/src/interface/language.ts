@@ -8,13 +8,14 @@ export interface LanguageStoreState {
 
 export interface LocaleData {
   CreateIdLabels: CreateIdLabelProps;
-  CreateIdMediolanumLabels: CreateIdMediolanumLabelProps;
+  CreateIdQXLabels: CreateIdqxLabelProps;
   AccountsLabels: AccountsIdLabelProps;
   ProfileLabels: ProfileLabelProps;
   PreferencesLabels: PreferencesLabelProps;
   WalletLabels: WalletLabelProps;
   PolicyLabels: PolicyLabelProps;
   ToastAlertLabels: ToastAlertLabelProps;
+  DIDLabels: DIDLabelProps;
 }
 
 export interface CreateIdLabelProps {
@@ -53,7 +54,7 @@ export interface CreateIdLabelProps {
   };
 }
 
-export interface CreateIdMediolanumLabelProps {
+export interface CreateIdqxLabelProps {
   title: {
     id: string;
     email: string;
@@ -128,6 +129,7 @@ export interface ProfileLabelProps {
     email: string;
     walletKeys: string;
     privacyPolicy: string;
+    did: string;
   };
   history: {
     title: string;
@@ -144,6 +146,7 @@ export interface PreferencesLabelProps {
   shareEmail: string;
   shareRewards: string;
   shareName: string;
+  anonymous: string;
 }
 
 export interface WalletLabelProps {
@@ -217,4 +220,36 @@ export interface ToastAlertLabelProps {
     title: string;
     error: string;
   };
+}
+
+interface DIDLabelProps {
+  title: string;
+  description: string;
+  table: {
+    name: string;
+    did: string;
+    created: string;
+    status: string;
+    actions: string;
+    valid: string;
+    invalid: string;
+  }
+  modal: {
+    title: string;
+    description: string;
+    label: string;
+    action: string;
+    name: {
+      label: string;
+      placeholder: string;
+    }
+    did: {
+      label: string;
+      placeholder: string;
+    };
+  }
+  notFound: {
+    title: string;
+    description: string;
+  }
 }

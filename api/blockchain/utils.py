@@ -5,6 +5,8 @@ from jinja2 import Template
 from solcx import compile_source, install_solc
 import os, json
 from typing import Tuple, Any, Optional
+import requests
+import pydid
 
 def initialize_web3(token_id: int) -> Tuple[Web3, Any]:
     try:
@@ -74,6 +76,9 @@ def mint_token_to_user(token_id: int, amount: int = 10 ** 18, customer: Optional
 
 
 def generate_and_deploy_solidity_code(token_name: str, token_symbol: str, decimals: int, initial_supply: int, burnable: bool) -> Tuple[str, str]:
+    # Sanitize token_name for use as a contract name (remove spaces)
+    contract_name = token_name.replace(" ", "_")
+    
     template = Template('''
     // SPDX-License-Identifier: MIT
     pragma solidity ^0.8.20;
@@ -84,7 +89,7 @@ def generate_and_deploy_solidity_code(token_name: str, token_symbol: str, decima
     {% endif %}
     import "@openzeppelin/contracts/access/Ownable.sol";
 
-    contract {{ token_name }} is ERC20{% if burnable %}, ERC20Burnable{% endif %}, Ownable {
+    contract {{ contract_name }} is ERC20{% if burnable %}, ERC20Burnable{% endif %}, Ownable {
         constructor(address initialOwner)
             ERC20("{{ token_name }}", "{{ token_symbol }}")
             Ownable(initialOwner)
@@ -101,20 +106,30 @@ def generate_and_deploy_solidity_code(token_name: str, token_symbol: str, decima
     solidity_code = template.render(
         token_name=token_name,
         token_symbol=token_symbol,
+        contract_name=contract_name,
         decimals=decimals,
         initial_supply=initial_supply,
         burnable=burnable
     )
 
     output_dir = os.path.dirname(os.path.abspath(__file__))
-    output_file = os.path.join(output_dir, f"{token_name}.sol")
+    output_file = os.path.join(output_dir, f"{contract_name}.sol")
     
     try:
         with open(output_file, 'w') as file:
             file.write(solidity_code)
         print(f"Solidity contract '{output_file}' generated successfully.")
 
+ 
         install_solc('0.8.20')
+        
+        import subprocess
+        
+        try:
+            subprocess.run(["solc-select", "use", "0.8.20"], check=True)
+            os.environ["SOLC_VERSION"] = "0.8.20"
+        except subprocess.CalledProcessError:
+            print("Warning: Failed to set solc version with solc-select. Continuing with py-solc-x...")
 
         compiled_sol = compile_source(
             solidity_code,
@@ -126,8 +141,8 @@ def generate_and_deploy_solidity_code(token_name: str, token_symbol: str, decima
 
         w3 = Web3(Web3.HTTPProvider(DEFAULT_RPC_URL))
 
-        contract_abi = json.dumps(compiled_sol['<stdin>:' + token_name]['abi'])
-        contract_bytecode = compiled_sol['<stdin>:' + token_name]['bin']
+        contract_abi = json.dumps(compiled_sol['<stdin>:' + contract_name]['abi'])
+        contract_bytecode = compiled_sol['<stdin>:' + contract_name]['bin']
 
         owner_account = w3.eth.account.from_key(OWNER_PRIVATE_KEY)
         nonce = w3.eth.get_transaction_count(owner_account.address)
@@ -162,3 +177,37 @@ def generate_blockchain_keys() -> Tuple[str, str, str]:
     public_key = account.address
 
     return mnemonic, private_key, public_key
+
+def validate_did(did: str) -> bool:
+    try:
+        response = requests.get(f'https://didlint.ownyourdata.eu/api/validate/{did}')
+        external_validation = response.json().get('valid', False)
+    except Exception:
+        external_validation = False
+    
+    try:
+        did_obj = pydid.DID(did)
+        pydid_validation = True
+    except Exception as e:
+        print(f"Error validating DID with pydid: {e}")
+        pydid_validation = False
+
+    try:
+        resolver_url = f"https://dev.uniresolver.io/1.0/identifiers/{did}"
+        headers = {"Accept": "application/did+json"}
+        resolver_response = requests.get(resolver_url, headers=headers, timeout=5)
+        
+        if resolver_response.status_code == 200:
+            try:
+                did_doc = resolver_response.json()
+                network_validation = "@context" in did_doc or "id" in did_doc
+            except ValueError:
+                network_validation = False
+        else:
+            network_validation = False
+    except Exception as e:
+        print(f"Error resolving DID over network: {e}")
+        network_validation = False
+
+    # DID is valid if syntactically correct AND either externally validated or resolvable
+    return pydid_validation and (external_validation or network_validation)

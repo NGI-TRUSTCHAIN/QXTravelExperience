@@ -22,4 +22,9 @@ export const useModal = create<ModalMap>((set) => ({
         onOpen: () => set((state) => ({ changeUserInfo: { ...state.changeUserInfo, isOpen: true } })),
         onClose: () => set((state) => ({ changeUserInfo: { ...state.changeUserInfo, isOpen: false } })),
     },
+    createDID: {
+        isOpen: false,
+        onOpen: () => set((state) => ({ createDID: { ...state.createDID, isOpen: true } })),
+        onClose: () => set((state) => ({ createDID: { ...state.createDID, isOpen: false } })),
+    },
 }));

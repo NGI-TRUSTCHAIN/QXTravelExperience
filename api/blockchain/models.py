@@ -56,3 +56,17 @@ class Transaction(models.Model):
 
     def __str__(self):
         return self.tx_hash
+    
+class DID(models.Model):
+    did = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
+    valid = models.BooleanField(default=False)
+
+    # Relationships
+    customer = models.ForeignKey('app.CustomerProfile', on_delete=models.SET_NULL, related_name='dids', null=True, blank=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.did

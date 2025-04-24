@@ -109,7 +109,7 @@ export const postUserInfo = async ({
     }).post(apiEndpoints.private.userUpdate, body);
     return data;
   } catch (error) {
-    console.error("Error fetching user info:", error);
+    console.error("Error updating user info:", error);
     throw error;
   }
 };

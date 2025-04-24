@@ -8,6 +8,10 @@ export interface ApiEndpoints {
         userDeleteAccount: string;
         userChangeEmail: string;
         combinedTokenBalance: string;
+        did: {
+          create: string;
+          get: string;
+        }
     };
 
     public: {

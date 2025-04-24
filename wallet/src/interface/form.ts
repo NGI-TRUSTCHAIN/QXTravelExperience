@@ -51,3 +51,12 @@ export interface DonateFundsFormProps {
     onSubmitDonateFunds: (data: { type: donateFundsTypes }) => void;
     languageData: LocaleData;
 }
+
+export  interface CreateDIDFormProps {
+    createDIDForm: UseFormReturn<{
+        name: string;
+        did: string;
+    }>;
+    onSubmitCreateDID: (data: { name: string; did: string }) => void;
+    languageData: LocaleData;
+}

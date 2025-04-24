@@ -7,6 +7,12 @@ WORKDIR /app
 # Copy package.json and package-lock.json (if available)
 COPY package*.json ./
 
+# Define build arguments for Vite environment variables
+ARG VITE_BASE_API_URL
+
+# Set environment variables for Vite
+ENV VITE_BASE_API_URL=$VITE_BASE_API_URL
+
 # Install dependencies
 RUN npm install
 

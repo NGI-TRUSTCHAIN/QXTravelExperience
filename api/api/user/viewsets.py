@@ -16,6 +16,13 @@ from django.shortcuts import render
 from django.utils.html import escape
 import base64
 from core.settings import FRONT_WALLET_URL
+from rest_framework.views import APIView
+from django.utils.module_loading import import_string
+import logging
+from drfpasswordless.settings import api_settings
+from drfpasswordless.serializers import CallbackTokenAuthSerializer
+
+logger = logging.getLogger(__name__)
 
 class UserViewSet(
     viewsets.GenericViewSet, mixins.CreateModelMixin, mixins.UpdateModelMixin
@@ -54,6 +61,21 @@ class UserViewSet(
 class CustomerViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
     authentication_classes = (TokenAuthentication,)
+
+    @action(detail=False, methods=['get'], url_path='check-session')
+    def check_session(self, request, *args, **kwargs):
+        response = Response({"success": True}, status.HTTP_200_OK)
+        if request.user.is_authenticated and hasattr(request.user, 'auth_token'):
+            response.set_cookie(
+                'auth_token',
+                request.user.auth_token.key,
+                httponly=True,
+                secure=True,
+                samesite='Lax',
+                domain='.cloudqx.io',
+                max_age=60*60*24*30 # 30 days
+            )
+        return response
 
     @action(detail=False, methods=['get'], url_path='info')
     def info(self, request, *args, **kwargs):
@@ -137,4 +159,43 @@ class VerifyEmailViewSet(viewsets.ViewSet):
             }
 
         return render(request, 'core/email_verified.html', context)
+
+class CustomObtainAuthToken(APIView):
+    """
+    Custom implementation of ObtainAuthTokenFromCallbackToken instead of drfpasswordless.
+    Returns an Auth Token based on the callback token and source.
+    """
+    permission_classes = (AllowAny,)
+    serializer_class = CallbackTokenAuthSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            user = serializer.validated_data["user"]
+            token_creator = import_string(api_settings.PASSWORDLESS_AUTH_TOKEN_CREATOR)
+            (token, _) = token_creator(user)
+
+            if token:
+                TokenSerializer = import_string(api_settings.PASSWORDLESS_AUTH_TOKEN_SERIALIZER)
+                token_serializer = TokenSerializer(data=token.__dict__, partial=True, context={"request": request})
+                if token_serializer.is_valid():
+                    response = Response(token_serializer.data, status=status.HTTP_200_OK)
+                    response.set_cookie(
+                        'auth_token',
+                        token.key,
+                        httponly=True,
+                        secure=True,
+                        samesite='Lax',
+                        domain='.cloudqx.io',
+                        max_age=60*60*24*30 # 30 days
+                    )
+                    response.data.update({
+                        "user_id": user.id,
+                        "email": user.email,
+                        "success": True
+                    })
+                    return response
+        else:
+            logger.error("Couldn't log in unknown user. Errors on serializer: {}".format(serializer.error_messages))
+        return Response({"detail": "Couldn't log you in. Try again later.", "success": False}, status=status.HTTP_400_BAD_REQUEST)
     

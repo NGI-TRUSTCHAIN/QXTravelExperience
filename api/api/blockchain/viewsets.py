@@ -5,9 +5,9 @@ from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.request import Request
 from api.authentication.backends import ActiveSessionAuthentication
-from blockchain.models import Network, Token, Transaction
+from blockchain.models import Network, Token, Transaction, DID
 from app.models import CustomerProfile
-from blockchain.utils import get_user_balance, mint_token_to_user, generate_and_deploy_solidity_code
+from blockchain.utils import get_user_balance, mint_token_to_user, generate_and_deploy_solidity_code, validate_did
 from api.blockchain.serializers import TokenSerializer, TransactionSerializer, NetworkSerializer
 
 class BlockchainViewSet(viewsets.ViewSet):
@@ -152,7 +152,7 @@ class BlockchainViewSet(viewsets.ViewSet):
         pausable = request.data.get('pausable', True)
 
         if not all([name, symbol]):
-            return Response(status=400, data={'error': 'name and token_symbol are required'})
+            return Response(status=400, data={'error': 'name and symbol are required'})
 
         try:
             contract_address, contract_abi = generate_and_deploy_solidity_code(
@@ -179,3 +179,51 @@ class BlockchainViewSet(viewsets.ViewSet):
 
         except Exception as e:
             return Response(status=500, data={'error': str(e)})
+
+    @action(detail=False, methods=['get'], authentication_classes=[TokenAuthentication])
+    def dids(self, request: Request) -> Response:
+        customer, error_response = self.get_customer(request)
+        if error_response:
+            return error_response
+
+        dids = DID.objects.filter(customer=customer)
+        return Response([{
+            'did': did.did,
+            'name': did.name,
+            'valid': did.valid,
+            'created_at': did.created_at
+        } for did in dids])
+    
+    @action(detail=False, methods=['post'], authentication_classes=[TokenAuthentication])
+    def add_did(self, request: Request) -> Response:
+        customer, error_response = self.get_customer(request)
+        if error_response:
+            return error_response
+
+        did = request.data.get('did')
+        name = request.data.get('name', '')
+        
+        if not did:
+            return Response(status=400, data={'error': 'DID is required'})
+
+        if DID.objects.filter(did=did).exists():
+            return Response(status=400, data={'error': 'DID already exists'})
+
+        valid = validate_did(did)
+        
+        if not valid:
+            return Response(status=400, data={'error': 'Invalid DID'})
+            
+        did_obj = DID.objects.create(
+            did=did,
+            name=name,
+            valid=valid,
+            customer=customer
+        )
+
+        return Response({
+            'did': did_obj.did,
+            'name': did_obj.name,
+            'valid': did_obj.valid,
+            'created_at': did_obj.created_at
+        })

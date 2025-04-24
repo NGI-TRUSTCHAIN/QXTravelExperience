@@ -1,10 +1,11 @@
 export interface User {
-  email?: string | null;
+  email: string | null;
   first_name: string | null;
   last_name: string | null;
-  profile_picture?: string | null;
+  profile_picture: string | null;
   phone_number: string | null;
   birthday: Date | string | null;
+  anonymous: boolean;
 }
 
 export interface UserLogs {

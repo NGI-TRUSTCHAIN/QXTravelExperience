@@ -9,16 +9,15 @@ import { z } from "zod";
 import { Separator } from '../ui/separator';
 import React from "react";
 import { toast } from "../ui/use-toast";
+import { usePostUserInfo } from "@/hooks/use-user";
 
 export function PreferencesForm(): JSX.Element {
     const { languageData } = useLanguage();
+    const { userInfo, postUserInfoData, loading } = usePostUserInfo()
 
     const FormSchema = z.object({
         specialOffers: z.boolean().default(true),
-        shareData: z.boolean().default(false),
-        shareEmail: z.boolean().default(false),
-        shareRewards: z.boolean().default(true),
-        shareName: z.boolean().default(true),
+        anonymous: z.boolean().default(false),
     });
 
     type FormSchemaType = z.infer<typeof FormSchema>;
@@ -27,10 +26,7 @@ export function PreferencesForm(): JSX.Element {
     // Retrieve preferences object from localStorage or use defaults
     const defaultValues: FormSchemaType = {
         specialOffers: localStorageHelper.exists('preferences') ? localStorageHelper.getItem<{ [key in PreferencesKeys]: boolean }>('preferences')!.specialOffers : true,
-        shareData: localStorageHelper.exists('preferences') ? localStorageHelper.getItem<{ [key in PreferencesKeys]: boolean }>('preferences')!.shareData : false,
-        shareEmail: localStorageHelper.exists('preferences') ? localStorageHelper.getItem<{ [key in PreferencesKeys]: boolean }>('preferences')!.shareEmail : false,
-        shareRewards: localStorageHelper.exists('preferences') ? localStorageHelper.getItem<{ [key in PreferencesKeys]: boolean }>('preferences')!.shareRewards : true,
-        shareName: localStorageHelper.exists('preferences') ? localStorageHelper.getItem<{ [key in PreferencesKeys]: boolean }>('preferences')!.shareName : true,
+        anonymous: userInfo ? userInfo.anonymous : localStorageHelper.exists('preferences') ? localStorageHelper.getItem<{ [key in PreferencesKeys]: boolean }>('preferences')!.anonymous : true,
     };
 
     const form = useForm<FormSchemaType>({
@@ -46,14 +42,30 @@ export function PreferencesForm(): JSX.Element {
             return watchedValues[key as PreferencesKeys] === defaultValues[key as PreferencesKeys];
         });
 
-    function onSubmit(data: FormSchemaType) {
-        localStorageHelper.setItem('preferences', data);
+    async function onSubmit(data: FormSchemaType) {
+        const formData = new FormData();
+        formData.append('anonymous', data.anonymous.toString());
 
-        form.reset(data);
+        const response = await postUserInfoData({ body: formData });
 
-        toast({
-            title: languageData.ToastAlertLabels.preferences.title
-        });
+
+        if (!loading) {
+            if (response) {
+                localStorageHelper.setItem('preferences', data);
+                toast({
+                    title: languageData.ToastAlertLabels.changeUserInfo.title,
+                })
+                form.reset(data);
+            }
+            else {
+                toast({
+                    title: languageData.ToastAlertLabels.changeUserInfo.error,
+                    variant: 'destructive'
+                })
+
+            }
+        }
+
     }
 
     return (

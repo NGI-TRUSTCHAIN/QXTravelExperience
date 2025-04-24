@@ -1,11 +1,10 @@
 import { Separator } from "@/components/ui/separator";
 
 export function Mnemonic({ mnemonic }: { mnemonic: string[] }): JSX.Element {
-    console.log(mnemonic);
     return (
         <div className="flex justify-between items-center">
             <div className="flex flex-col gap-2 ">
-                {[mnemonic].map((word, index) => (
+                {mnemonic.map((word, index) => (
                     index < 6 && (
                         <div key={index} className="text-oxfordBlue">
                             <span className="text-xl">
@@ -17,7 +16,7 @@ export function Mnemonic({ mnemonic }: { mnemonic: string[] }): JSX.Element {
                 ))}
             </div>
             <div className="flex flex-col gap-2">
-                {[mnemonic].map((word, index) => (
+                {mnemonic.map((word, index) => (
                     index >= 6 && (
                         <div key={index} className="text-oxfordBlue ">
                             <span className="text-xl">

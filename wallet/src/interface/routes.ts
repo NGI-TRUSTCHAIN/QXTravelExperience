@@ -5,6 +5,7 @@ export interface Routes {
     preferences: string;
     wallet: string;
     policy: string;
+    did: string;
     walletView: string;
     walletViewQuery: (email: string, token: string) => string;
 }

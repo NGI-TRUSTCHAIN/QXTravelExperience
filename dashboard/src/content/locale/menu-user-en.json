@@ -1,0 +1,346 @@
+{
+    "LoginLabels": {
+        "title": "Login",
+        "description": "",
+        "email": {
+            "label": "Email",
+            "placeholder": "Your email address"
+        },
+        "password": {
+            "label": "Password",
+            "placeholder": "Your password"
+        },
+        "newPassword": {
+            "label": "New Password",
+            "placeholder": "Your new password"
+        },
+        "confirmPassword": {
+            "label": "Confirm Password",
+            "placeholder": "Confirm your password"
+        },
+        "rememberMe": "Remember me",
+        "register": "Register",
+        "customer": {
+            "already": "Already a customer?",
+            "register": "Register User Account",
+            "contact": "Don't have an user account? Call Us "
+        },
+        "sendMeEmail": "Send me an email",
+        "submit": "Submit",
+        "signIn": "Sign In",
+        "backToLogin": "Back to login..",
+        "login": "Login",
+        "error": {
+            "email": "Please enter a valid email address",
+            "password": "Please enter a valid password",
+            "wrongCredentials": "Wrong email or password"
+        }
+    },
+    "SideNavbarLabels": {
+        "network": {
+            "title": "SSI Networks and Wallets",
+            "label": "SSI Networks and Wallets"
+        },
+        "tokens": {
+            "title": "Tokens and Web3 Tool",
+            "label": "Tokens and Web3 Tool"
+        },
+        "customers": {
+            "title": "People (CRM)",
+            "label": "People (CRM)"
+        },
+        "back": {
+            "title": "Back",
+            "label": "Back"
+        }
+    },
+    "FilterGridLabels": {
+        "partner": "Partner",
+        "createNetwork": "Create Network",
+        "back": "Back",
+        "all": "All",
+        "active": "Active",
+        "suspend": "Suspend",
+        "pending": "Pending",
+        "denied": "Denied",
+        "approved": "Approved",
+        "welcomeMessage": "Welcome Message",
+        "search": "Search",
+        "clearFilters": "Clear all filters"
+    },
+    "NetworkCardLabels": {
+        "table": {
+            "columns": "Columns",
+            "id": "ID",
+            "name": "Name",
+            "chainId": "Chain ID",
+            "currencySymbol": "Currency Symbol",
+            "createdAt": "Created At",
+            "actions": {
+                "open": "Open Menu",
+                "label": "Actions",
+                "copy": "Copy Network ID",
+                "view": "View Network Customers",
+                "edit": "Edit Network"
+            },
+            "loading": "Loading...",
+            "noResults": "No Results.",
+            "of": "Of",
+            "rowsSelected": "Row(s) Selected."
+        },
+        "networksNotFound": "Network not found"
+    },
+    "NetworkModalLabels": {
+        "title": {
+            "add": "Create ID Network",
+            "edit": "Edit ID Network"
+        },
+        "active": "Active",
+        "name": {
+            "label": "Name",
+            "placeholder": "Enter name",
+            "required": "Name is required"
+        },
+        "chainId": {
+            "label": "Chain ID",
+            "placeholder": "Enter chain ID",
+            "required": "Chain ID must be a positive number"
+        },
+        "rpcUrl": {
+            "label": "RPC URL",
+            "placeholder": "Enter RPC URL",
+            "required": "RPC URL must be a valid URL"
+        },
+        "currencySymbol": {
+            "label": "Currency Symbol",
+            "placeholder": "Enter currency symbol",
+            "required": "Currency symbol is required"
+        },
+        "save": "Save",
+        "cancel": "Cancel"
+    },
+    "CustomerCardLabels": {
+        "table": {
+            "columns": "Columns",
+            "id": "ID",
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "phoneNumber": "Phone Number",
+            "blockchainAddress": "Blockchain Address",
+            "rewardPoints": "Reward Points",
+            "lastCheckIn": "Last Check-In",
+            "status": "Status",
+            "createdAt": "Created At",
+            "actions": {
+                "open": "Open Menu",
+                "label": "Actions",
+                "copy": "Copy Blockchain Address",
+                "view": "View Customer Details",
+                "chat": "Open Customer Chat",
+                "edit": "Edit Customer"
+            },
+            "loading": "Loading...",
+            "noResults": "No Results.",
+            "of": "Of",
+            "rowsSelected": "Row(s) Selected."
+        },
+        "card":{
+            "contact": "Contact",
+            "email":"Email",
+            "gender": "Gender",
+            "birthday": "Birthday",
+            "rewardPoints": "Reward Points",
+            "walletAddress": "Wallet Address"
+        },
+        "customersNotFound": "Customer not found"
+    },
+    "FormActionLabels": {
+        "save": "Save",
+        "cancel": "Cancel",
+        "contentLanguage": "Content Language",
+        "languages": "Languages",
+        "available": "Available: Content exists in this language",
+        "modified": "Modified: Content has unsaved changes",
+        "notAvailable": "Not Available: Content does not exist in this language"
+    },
+    "ActionPromiseLabels": {
+        "title": {
+            "success": "Done !",
+            "error": "Error !"
+        },
+        "description": {
+            "success": "Successfully",
+            "error": "Failed",
+            "organization": {
+                "create": "Created Organization",
+                "update": "Updated Organization",
+                "delete": "Deleted Organization"
+            },
+            "customer": {
+                "create": "Created Customer",
+                "update": "Updated Customer",
+                "delete": "Deleted Customer"
+            },
+            "category": {
+                "create": "Created Category",
+                "update": "Updated Category",
+                "delete": "Deleted Category"
+            },
+            "token": {
+                "create": "Created Token",
+                "update": "Updated Token",
+                "delete": "Deleted Token"
+            }
+        }
+    },
+    "TableLabels": {
+        "actions": {
+            "open": "Open Menu",
+            "label": "Actions",
+            "activate": "Activated",
+            "suspend": "Suspend",
+            "copy": "Copy Blockchain Address",
+            "view": "View Details",
+            "chat": "Open Chat",
+            "edit": "Edit",
+            "status": "Status",
+            "delete": "Delete"
+        },
+        "columns": "Columns",
+        "loading": "Loading...",
+        "noResults": "No Results.",
+        "of": "Of",
+        "rowsSelected": "Row(s) Selected.",
+        "notFound": "Record not found"
+    },
+    "TokenModalLabels": {
+        "title": {
+            "add": "Add Token",
+            "edit": "Edit Token"
+        },
+        "description": {
+            "add": "This data is permanent. Once you name and set the parameters for the token, they are permanent."
+        },
+        "active": "Active",
+        "name": {
+            "label": "Name",
+            "placeholder": "Enter name"
+        },
+        "symbol": {
+            "label": "Symbol",
+            "placeholder": "Enter symbol"
+        },
+        "network": {
+            "label": "Network",
+            "placeholder": "Select network"
+        },
+        "mintable": {
+            "label": "Mintable",
+            "placeholder": "Select mintable"
+        },
+        "burnable": {
+            "label": "Burnable",
+            "placeholder": "Select burnable"
+        },
+        "transferable": {
+            "label": "Transferable",
+            "placeholder": "Select transferable"
+        },
+        "save": "Save",
+        "cancel": "Cancel"
+    },
+    "TokenCardLabels": {
+        "table": {
+            "columns": "Columns",
+            "id": "ID",
+            "name": "Name",
+            "symbol": "Symbol",
+            "network": "Network",
+            "totalSupply": "Total Supply",
+            "contractAddress": "Contract Address",
+            "active": "Active",
+            "mintable": "Mintable",
+            "burnable": "Burnable",
+            "transferable": "Transferable",
+            "createdAt": "Created At",
+            "actions": {
+                "open": "Open Menu",
+                "label": "Actions",
+                "view": "View Token Details",
+                "copy": "Copy Token ID",
+                "chat": "Open Token Chat",
+                "edit": "Edit Token"
+            },
+            "loading": "Loading...",
+            "noResults": "No Results.",
+            "of": "Of",
+            "rowsSelected": "Row(s) Selected."
+        },
+        "notFound": "Token not found"
+    },
+    "TransactionCardLabels": {
+        "table": {
+            "columns": "Columns",
+            "id": "ID",
+            "txHash": "TX Hash",
+            "fromAddress": "From",
+            "toAddress": "To",
+            "token": "Token",
+            "value": "Value",
+            "status": "Status",
+            "createdAt": "Created At",
+            "actions": {
+                "copyTxHash": "Copy TX Hash",
+                "copyFromAddress": "Copy From Address",
+                "copyToAddress": "Copy To Address"
+            },
+            "loading": "Loading...",
+            "noResults": "No Results.",
+            "of": "Of",
+            "rowsSelected": "Row(s) Selected."
+        },
+        "notFound": "Transaction not found"
+    },
+    "DeleteRecord": {
+        "title": "Are you absolutely sure?",
+        "description": "This action cannot be undone. This will permanently the record and it's correlating data.",
+        "cancel": "Cancel",
+        "confirm": "Delete"
+    },
+    "StatusModalLabels": {
+        "title": "Do you want to change this record?",
+        "description": "If you deny the request, the user will be notified that the request has been denied, but you can approve it later. Once approved, the user will be able to access the platform and the action is permanent.",
+        "cancel": "Cancel",
+        "approve": "Approve",
+        "deny": "Deny",
+        "pending": "Pending"
+    },
+    "TimeAgo": {
+        "seconds": "less than a minute",
+        "minute": "1 minute",
+        "minutes": "{{value}} minutes",
+        "hour": "1 hour",
+        "hours": "{{value}} hours",
+        "day": "1 day",
+        "days": "{{value}} days",
+        "week": "1 week",
+        "weeks": "{{value}} weeks",
+        "month": "1 month",
+        "months": "{{value}} months",
+        "year": "1 year",
+        "years": "{{value}} years",
+        "now": "just now",
+        "ago": "ago",
+        "fromNow": "from now"
+    },
+    "PaginationLabels": {
+        "previous": "Previous",
+        "next": "Next",
+        "page": "Page",
+        "of": "of",
+        "rowsPerPage": "Rows per page",
+        "showing": "Showing",
+        "to": "to",
+        "results": "results"
+    }
+}

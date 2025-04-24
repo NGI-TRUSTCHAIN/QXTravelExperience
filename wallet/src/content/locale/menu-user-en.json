@@ -34,7 +34,7 @@
       "description": "After you submit a new email address, we will send you a confirmation email."
     }
   },
-  "CreateIdMediolanumLabels": {
+  "CreateIdQXLabels": {
     "title": {
       "id": "Self-Sovereign ID",
       "email": "Check your email"
@@ -64,7 +64,7 @@
   },
   "AccountsLabels": {
     "active": {
-      "title": "Home",
+      "title": "Discover",
       "action": "Active",
       "tokenDescription": "Your full amount of QX Tokens"
     }
@@ -106,7 +106,8 @@
       "title": "Account",
       "email": "john.doe@example.email",
       "walletKeys": "Your Wallet Keys",
-      "privacyPolicy": "Privacy Policy"
+      "privacyPolicy": "Privacy Policy",
+      "did": "Decentralized Identifiers (DIDs)"
     },
     "history": {
       "title": "History",
@@ -121,7 +122,8 @@
     "shareData": "Share your usage data with brands",
     "shareEmail": "Share your email with brands",
     "shareRewards": "Share data only if rewards are included",
-    "shareName": "Never share your Name"
+    "shareName": "Never share your Name",
+    "anonymous": "Never share your Name"
   },
   "WalletLabels": {
     "title": "Your Wallet Keys",
@@ -191,6 +193,37 @@
     "backupWallet": {
       "title": "Wallet Backup has been downloaded",
       "error": "An error occurred while downloading your wallet backup"
+    }
+  },
+  "DIDLabels": {
+    "title": "Decentralized Identifiers (DIDs)",
+    "description": "Manage your decentralized identifiers and their current status.",
+    "table": {
+      "name": "Name",
+      "did": "DID",
+      "created": "Created",
+      "status": "Status",
+      "actions": "Actions",
+      "valid": "Valid",
+      "invalid": "Invalid"
+    },
+    "modal": {
+      "title": "Add a new DID",
+      "description": "Add a new Decentralized Identifier (DID) by entering a name and DID value below.",
+      "label": "Add New DID",
+      "action": "Add",
+      "name": {
+        "label": "DID Name",
+        "placeholder": "Enter name for your DID"
+      },
+      "did": {
+        "label": "DID Value",
+        "placeholder": "Enter DID Value"
+      }
+    },
+    "notFound": {
+      "title": "No DIDs Found",
+      "description": "You haven't created any decentralized identifiers yet."
     }
   }
 }

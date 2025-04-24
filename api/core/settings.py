@@ -22,6 +22,8 @@ SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ.get('SECRET_KEY', 'insecure-veryssecret_123')
+FERNET_KEY = os.environ.get('FERNET_KEY', 'JAH5xhNUqKMSK9ybU8EkMsb9yZ9JAwCMxYAv5vaVy3w=')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
@@ -29,15 +31,14 @@ DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 if DEBUG:
     load_dotenv()
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
-FERNET_KEY = os.environ.get('FERNET_KEY')
-
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "*").split(" ")
 MAIN_URL = os.environ.get("MAIN_URL", "http://0.0.0.0:5000")
+DASHBOARD_URL = os.environ.get("DASHBOARD_URL", "https://app.cloudqx.io")
 
 # Application definition
 
 INSTALLED_APPS = [
+    "modeltranslation",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -50,9 +51,12 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "drfpasswordless",
     "api",
+    "api.user",
     "api.authentication",
+    "api.crm",
     "api.blockchain",
     "app",
+    "drf_standardized_errors",
     "blockchain",
 ]
 
@@ -95,8 +99,8 @@ DATABASES = {
     "default": {
         "ENGINE": os.environ.get("DB_ENGINE", 'django.contrib.gis.db.backends.postgis'),
         "NAME": os.environ.get("DB_NAME", "postgres"),
-        "USER": os.environ.get("DB_USER", "qx_user"),
-        "PASSWORD": os.environ.get("DB_PASSWORD", "qx_password"),
+        "USER": os.environ.get("DB_USER", "travelqx_user"),
+        "PASSWORD": os.environ.get("DB_PASSWORD", ""),
         "HOST": os.environ.get("DB_HOST", "localhost"),
         "PORT": os.environ.get("DB_PORT", "5432"),
         "OPTIONS": {
@@ -177,7 +181,10 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.TokenAuthentication",
     ),
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
+    "EXCEPTION_HANDLER": "drf_standardized_errors.handler.exception_handler",
 }
+
+DRF_STANDARDIZED_ERRORS = {"ENABLE_IN_DEBUG_FOR_UNHANDLED_EXCEPTIONS": True}
 
 # ##################################################################### #
 #  DRFPASSWORDLESS 
@@ -189,7 +196,7 @@ PASSWORDLESS_AUTH = {
     'PASSWORDLESS_AUTH_TYPES': ['EMAIL'],
     'PASSWORDLESS_EMAIL_SUBJECT': "Login to QX",
     'PASSWORDLESS_EMAIL_NOREPLY_ADDRESS': 
-    os.environ.get('EMAIL_HOST_USER'),
+    os.environ.get('EMAIL_HOST_USER', 'noreply@email.com'),
     'PASSWORDLESS_EMAIL_TOKEN_HTML_TEMPLATE_NAME': "core/email.html",
     'PASSWORDLESS_TOKEN_EXPIRE_TIME': 15 * 60,
     'PASSWORDLESS_EMAIL_CALLBACK': 'app.utils.send_email_with_callback_token',
@@ -202,7 +209,7 @@ else:
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_USER = 'info@cloudqx.io'
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 # ##################################################################### #
@@ -218,6 +225,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5005",
     "http://0.0.0.0:5000",
     "http://0.0.0.0:5005",
+    "https://example.com",
 ]
 
 # Leaded from Environment
@@ -231,6 +239,12 @@ if CORS_ALLOWED_ORIGINS_ENV:
 #  ASGI_APPLICATION
 # ##################################################################### #
 ASGI_APPLICATION = "core.asgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 # Enable HTTP/2
 DAPHNE_SERVER_CLASS = 'daphne.http_protocol.HTTP2Protocol'

@@ -7,6 +7,7 @@ export const routes : Routes = {
     preferences: '/preferences',
     wallet: '/wallet',
     policy: '/policy',
+    did: '/did',
     walletView: '/wallet-view/',
     walletViewQuery: (email: string, token: string) => `/wallet-view/?code=${token}&email=${email}`
 }

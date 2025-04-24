@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: travelqx_db
+    environment:
+      - POSTGRES_PASSWORD=travelqx_password
+      - POSTGRES_USER=travelqx_user
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    ports:
+      - "5005:5005"
+    depends_on:
+      - db
+    env_file:
+      - ./api/.env
+    restart: unless-stopped
+
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+      args:
+        - VITE_PUBLIC_API_URL=http://localhost:5005
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  wallet:
+    build:
+      context: ./wallet
+      dockerfile: Dockerfile
+      args:
+        - VITE_BASE_API_URL=http://localhost:5005
+    ports:
+      - "8081:80"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
